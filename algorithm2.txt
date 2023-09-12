@@ -1,0 +1,45 @@
+Problem 2:Write a procedure, called dot_product which calculates in the variable ps,
+ the dot(scalar) product of v1 and v2 (v1 and v2 are vectors of IR)
+Write an algorithm which determines, for n pairs of given vectors, 
+whether two vectors of given IR are orthogonal, by calling the procedure defined in the previous question.
+The dot product of two orthogonal vectors is zero.
+Modify the previous algorithm if you use a dot_product function instead of a procedure.
+
+Solution:
+-Create a dot_product function that calculates the dot product of two vectors.
+
+-Create a function or algorithm that takes as input a list of n pairs of vectors, and for each pair, 
+it calls the dot_product function to calculate the dot product. If the dot product is zero (or very 
+close to zero, considering floating-point arithmetic), the vectors are orthogonal. 
+Otherwise, they are not orthogonal.
+-Define dot_product(v1, v2):
+-Check if the lengths of both vectors are the same
+    if len(v1) != len(v2):
+        return None  
+    //Cannot compute dot product for vectors of different lengths
+    
+    result = 0
+    for i in range(len(v1)):
+        result += v1[i] * v2[i]
+    return result
+-Define are_vectors_orthogonal(vector_pairs):
+    orthogonal_status = []  
+    //List to store whether each pair is orthogonal
+    
+    for pair in vector_pairs:
+        v1, v2 = pair
+        dot = dot_product(v1, v2)
+        
+-Check if the dot product is approximately zero (using a tolerance, e.g., 1e-9)
+        if abs(dot) < 1e-9:
+            orthogonal_status.append(True)
+        else:
+            orthogonal_status.append(False)
+    
+    return orthogonal_status
+
+-Example usage:
+vector_pairs = [([1, 0, 0], [0, 1, 0]), ([1, 2], [-2, 1]), ([3, 4], [4, -3])]
+orthogonal_result = are_vectors_orthogonal(vector_pairs)
+print(orthogonal_result) 
+//Output should be [True, True, False]
